@@ -1,0 +1,161 @@
+// ---------------------------------------------
+// TABLES
+// ---------------------------------------------
+table {
+  //
+  // Base elements
+  //
+  border-spacing: 0;
+  thead {
+    background-color: lighten($creme, 3);
+    border-bottom: 1px solid $black-lighten-50;
+    border-top: 1px solid $black-lighten-50;
+    // Need the extra nesting to overwrite Foundation styles
+    tr {
+      th {
+        font-size: font-scale(-1);
+        font-weight: normal;
+      }
+      th, td {
+        padding: .5625rem .625rem;
+      }
+    }
+  }
+  // Need the extra nesting to overwrite Foundation styles
+  tr {
+    td {
+      vertical-align: top;
+    }
+  }
+  th, td {
+    border-bottom: 1px solid $black-lighten-60;
+  }
+  input[type='checkbox'] {
+    margin: 0;
+  }
+  // Alt row bg colors
+  tr {
+    &.even, &.alt, &:nth-of-type(even) {
+      background-color: lighten($black, 72);
+    }
+  }
+  //
+  // More optional styles such as bg on hover, selected rows bg, etc.
+  //
+  // For tables with rows that are selectable by checkbox
+  tr.is-selected {
+    background-color: lighten($yellow, 31);
+  }
+  // On row hover... could be used to add different coloured borders, etc.
+  &.on-hover-row {
+    tbody {
+      tr:hover {
+        background-color: lighten($yellow, 34);
+      }
+    }
+  }
+  // Index # column for table row
+  .col-index {
+    text-align: right;
+  }
+  // Extra information that should be displaced with less priority
+  .more-email {
+    font-size: font-scale(-2);
+  }
+  // If the row selector is the first or last column in the table...
+  th, td {
+    &.col-row-selector {
+      &:first-child {
+        padding-right: 0;
+      }
+      &:last-child {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+//
+// Allow table to scroll when
+// it is viewed on a small screen
+//
+.acl_table-wrapper, .acl-tbl-wrapper {
+  border: 1px solid $black-lighten-60;
+  border-bottom: 0;
+  overflow: auto;
+  width: 100%;
+  table {
+    border: 0;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  // Open table with no side borders
+  &.open-tbl {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  &.borderless {
+    border: 0;
+  }
+
+  &.acl-tbl--scrolling {
+    max-height: 35rem;
+    overflow-y: auto;
+  }
+}
+
+
+//
+// Styles for table with a header and footer.
+// Header usually contains a heading for table + filter + sort...
+// Footer usually contain Save and Cancel actions.
+//
+.table_with_actions {
+  border: 1px solid $black-lighten-70;
+  border-radius: $global-radius;
+}
+
+.table_with_actions-header {
+  @include clearfix();
+
+  padding: .75rem 1rem .25rem;
+}
+
+// TODO: Set max-width for title and action
+// to prevent header from being broken with long title
+// and multiple actions.
+.table_with_actions-header-title {
+  float: left;
+  max-width: 60%;
+}
+
+.table_with_actions-header-actions {
+  float: right;
+  max-width: 35%;
+}
+
+.table_with_actions-footer {
+  @include clearfix();
+
+  border-top: 1px solid $black-lighten-70;
+  padding: .75rem 1rem 1rem;
+}
+
+//
+// Allow tbody of a table to scroll.
+// it is usually used with a table that has header and footer.
+//
+.acl_table-scrolling_body {
+  tbody {
+    display: block;
+    max-height: 25rem;
+    overflow-y: scroll;
+  }
+  thead, tbody tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+}

@@ -1,0 +1,14 @@
+// ------------------------------------------------------------
+// Caution zone,
+// contains delete button and warning message
+// ------------------------------------------------------------
+//
+.caution-zone {
+  .cz-message {
+    float: left;
+    width: 65%;
+  }
+  .acl-btn {
+    margin-top: -.75em;
+  }
+}

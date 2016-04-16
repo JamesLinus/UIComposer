@@ -1,0 +1,16 @@
+de:
+  acl_uploader:
+    drag_and_drop_note: "Ziehen & Ablegen"
+    or: ODER
+    choose_files: Dateien
+    from_your_computer: vom Rechner auswählen ...
+    dropzone_overlay:
+      header: Nahezu fertig!
+      text: Legen Sie Datei einfach irgendwo auf dieser Seite ab.
+    processing: Verarbeitung läuft...
+    fail_message_html: |
+      Vorsicht! Irgendetwas ist fehlgeschlagen. Bitte versuchen Sie es erneut. Wenn das Problem erneut auftritt,
+      <a href="%{support_url}" target="_blank">kontaktieren Sie bitte unser Support-Team</a>.
+    errors:
+      file_size_limit: 1 GB Grenze überschritten
+      type_is_not_supported: Dateityp wird nicht unterstützt

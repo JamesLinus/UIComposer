@@ -1,0 +1,306 @@
+// See http://codepen.io/pxsmith/pen/ZbbjKX for shorter code, utilizing Bourbon mixins
+//
+// Consider creating an animation mixin document for vendor prefixes
+//
+// TODO: Add autoprefixer and remove all vendor prefixes.
+//
+// ----------------------------------------------------------------------------------
+// Variables
+// ----------------------------------------------------------------------------------
+$loading-animation-time: .6s;
+
+// ----------------------------------------------------------------------------------
+// Keyframes
+// ----------------------------------------------------------------------------------
+@-webkit-keyframes grow__inner {
+  0% {
+    -webkit-transform: scale(.85) rotate(-2deg);
+  }
+  10% {
+    -webkit-transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.033) rotate(5deg);
+  }
+}
+@-moz-keyframes grow__inner {
+  0% {
+    -moz-transform: scale(.85) rotate(-2deg);
+  }
+  10% {
+    -moz-transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -moz-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -moz-transform: scale(1.033) rotate(5deg);
+  }
+}
+@keyframes grow__inner {
+  0% {
+    -webkit-transform: scale(.85) rotate(-2deg);
+       -moz-transform: scale(.85) rotate(-2deg);
+        -ms-transform: scale(.85) rotate(-2deg);
+         -o-transform: scale(.85) rotate(-2deg);
+            transform: scale(.85) rotate(-2deg);
+  }
+  10% {
+    -webkit-transform: scale(1) rotate(0deg);
+       -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+         -o-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+       -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+         -o-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.033) rotate(5deg);
+       -moz-transform: scale(1.033) rotate(5deg);
+        -ms-transform: scale(1.033) rotate(5deg);
+         -o-transform: scale(1.033) rotate(5deg);
+            transform: scale(1.033) rotate(5deg);
+  }
+}
+
+// Middle ring keyframe
+@-webkit-keyframes grow__middle {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.54808) rotate(-30deg);
+  }
+  9.9% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: scale(.54808) rotate(-30deg);
+  }
+  30% {
+    -webkit-transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.066) rotate(5deg);
+  }
+}
+@-moz-keyframes grow__middle {
+  0% {
+    opacity: 0;
+    -moz-transform: scale(.54808) rotate(-30deg);
+  }
+  9.9% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    -moz-transform: scale(.54808) rotate(-30deg);
+  }
+  30% {
+    -moz-transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -moz-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -moz-transform: scale(1.066) rotate(5deg);
+  }
+}
+@keyframes grow__middle {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.54808) rotate(-30deg);
+       -moz-transform: scale(.54808) rotate(-30deg);
+        -ms-transform: scale(.54808) rotate(-30deg);
+         -o-transform: scale(.54808) rotate(-30deg);
+            transform: scale(.54808) rotate(-30deg);
+  }
+  9.9% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: scale(.54808) rotate(-30deg);
+       -moz-transform: scale(.54808) rotate(-30deg);
+        -ms-transform: scale(.54808) rotate(-30deg);
+         -o-transform: scale(.54808) rotate(-30deg);
+            transform: scale(.54808) rotate(-30deg);
+  }
+  30% {
+    -webkit-transform: scale(1) rotate(0deg);
+       -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+         -o-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+       -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+         -o-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.066) rotate(5deg);
+       -moz-transform: scale(1.066) rotate(5deg);
+        -ms-transform: scale(1.066) rotate(5deg);
+         -o-transform: scale(1.066) rotate(5deg);
+            transform: scale(1.066) rotate(5deg);
+  }
+}
+
+// Outer ring keyframe
+@-webkit-keyframes grow__outer {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.6) rotate(-15deg);
+  }
+  29.9% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(.6) rotate(-15deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.1) rotate(5deg);
+  }
+}
+@-moz-keyframes grow__outer {
+  0% {
+    opacity: 0;
+    -moz-transform: scale(.6) rotate(-15deg);
+  }
+  29.9% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    -moz-transform: scale(.6) rotate(-15deg);
+  }
+  60% {
+    -moz-transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -moz-transform: scale(1.1) rotate(5deg);
+  }
+}
+@keyframes grow__outer {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.6) rotate(-15deg);
+       -moz-transform: scale(.6) rotate(-15deg);
+        -ms-transform: scale(.6) rotate(-15deg);
+         -o-transform: scale(.6) rotate(-15deg);
+            transform: scale(.6) rotate(-15deg);
+  }
+  29.9% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(.6) rotate(-15deg);
+       -moz-transform: scale(.6) rotate(-15deg);
+        -ms-transform: scale(.6) rotate(-15deg);
+         -o-transform: scale(.6) rotate(-15deg);
+            transform: scale(.6) rotate(-15deg);
+  }
+  60% {
+    -webkit-transform: scale(1) rotate(0deg);
+       -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+         -o-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(1.1) rotate(5deg);
+       -moz-transform: scale(1.1) rotate(5deg);
+        -ms-transform: scale(1.1) rotate(5deg);
+         -o-transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1) rotate(5deg);
+  }
+}
+
+// ----------------------------------------------------------------------------------
+// Styling
+// ----------------------------------------------------------------------------------
+.loading-animation g {
+  fill: $purple;
+}
+
+// Container
+.loading-animation svg {
+  position: fixed;
+  -webkit-transform-origin: center center;
+     -moz-transform-origin: center center;
+      -ms-transform-origin: center center;
+       -o-transform-origin: center center;
+          transform-origin: center center;
+  z-index: 100000; // TODO use z-floor-top, currently only available in Visualizer
+}
+
+// Overlay
+.loading-animation-overlay {
+  background: rgba(255, 255, 255, .9);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100000 - 10; // TODO use z-adjuster($z-floor-top, -1);
+}
+
+// Inner ring’s styling
+.svg-ring__inner {
+  left: calc(50% - (57px / 2));
+  top: calc(50% - (57px / 2));
+  -webkit-animation: grow__inner $loading-animation-time linear infinite;
+     -moz-animation: grow__inner $loading-animation-time linear infinite;
+          animation: grow__inner $loading-animation-time linear infinite;
+  -webkit-animation-direction: alternate-reverse;
+     -moz-animation-direction: alternate-reverse;
+          animation-direction: alternate-reverse;
+  height: 57px;
+  width: 57px;
+}
+
+// Middle ring’s styling
+.svg-ring__middle {
+  left: calc(50% - (104px / 2));
+  top: calc(50% - (104px / 2));
+  -webkit-animation: grow__middle $loading-animation-time linear infinite;
+     -moz-animation: grow__middle $loading-animation-time linear infinite;
+          animation: grow__middle $loading-animation-time linear infinite;
+  -webkit-animation-direction: alternate-reverse;
+     -moz-animation-direction: alternate-reverse;
+          animation-direction: alternate-reverse;
+  height: 104px;
+  width: 104px;
+}
+
+// Outer ring’s styling
+.svg-ring__outer {
+  left: calc(50% - (160px / 2));
+  top: calc(50% - (160px / 2));
+  -webkit-animation: grow__outer $loading-animation-time linear infinite;
+     -moz-animation: grow__outer $loading-animation-time linear infinite;
+          animation: grow__outer $loading-animation-time linear infinite;
+  -webkit-animation-direction: alternate-reverse;
+     -moz-animation-direction: alternate-reverse;
+          animation-direction: alternate-reverse;
+  height: 160px;
+  width: 160px;
+}

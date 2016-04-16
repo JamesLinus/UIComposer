@@ -1,0 +1,28 @@
+{
+  "name": "acl-icon-font",
+  "version": "1.0.0",
+  "homepage": "https://github.com/acl-services/acl-icon-font",
+  "authors": [
+    "Loc Nguyen"
+  ],
+  "main": [
+    "dist"
+  ],
+  "ignore": [
+    "*.html",
+    "*.js",
+    "*.json",
+    "*.md",
+    "Procfile",
+    "templates",
+    "resources",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "private": true
+}

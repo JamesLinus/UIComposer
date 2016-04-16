@@ -1,0 +1,242 @@
+
+// ------------------------------------------------------------
+// Header
+// ------------------------------------------------------------
+.acl-global-header {
+  // Only project that uses Foundation + everything from acl-ui
+  // needs this.
+  @extend .top-bar !optional;
+  height: 46px;
+
+  a {
+    @include no-underline();
+  }
+
+  .brand {
+    @include no-underline();
+
+    color: #FFF;
+    float: left;
+    line-height: 0;
+    margin-right: 1.2em;
+    padding-left: 1rem;
+    position: relative;
+    width: 5em;
+    @media #{$medium} {
+      padding-left: 1.5rem;
+    }
+    i {
+      display: block;
+      font-size: 38px;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .top-bar-section {
+    padding-right: 1em;
+
+
+    // top level menu item behavior
+    .mnu-item {
+      @media #{$small-only} {
+        &:hover,
+        &.hover {
+          a:after {
+            right: 3px;
+          }
+        }
+      }
+
+      &:hover {
+        background: $purple-darken-10;
+
+        > a {
+          background: $purple-darken-10;
+        }
+      }
+
+      .mnu-title {
+        color: white;
+        line-height: 1rem;
+        padding-top: 11px;
+
+        &:hover {
+          background: $purple-darken-10;
+
+          // hover state for chevron
+          &:after {
+            border-color: #FFF transparent transparent transparent;
+          }
+        }
+
+        // clicked state. "hover" name came from Foundation by default
+        .hover & {
+          background: #FFF;
+          color: $purple;
+
+          & > a {
+            background: #FFF; // background color for mnu-item using text
+            color: $purple;
+          }
+
+          // chevron
+          .mnu-title:after {
+            border-color: $purple transparent transparent transparent;
+          }
+        }
+      }
+
+      &.hover {
+        .mnu-title {
+          background: white;
+          color: $purple;
+
+          & > a {
+            background: #FFF; // background color for mnu-item using text
+            color: $purple;
+          }
+
+          // chevron
+          &:after {
+            border-color: $purple transparent transparent transparent;
+          }
+        }
+      }
+    }
+
+    .has-dropdown > a {
+      padding-right: 31px !important;
+      &:after {
+        top: 1.5rem;
+      }
+    }
+
+    .intercom_container{
+      float: left;
+      padding: 13px 30px 7px;
+      span {
+        border-bottom: none;
+        a.intercom_trigger {
+          color: $white;
+          font-size: 19px;
+        }
+      }
+    }
+  }
+
+  // menu title is the element that is attached to the top of a dropdown
+  .mnu-title {
+    @include no-underline();
+    color: #FFF;
+    font-weight: normal;
+    height: 46px;
+    padding-left: 15px;
+
+    i {
+      color: inherit;
+      display: inline-block;
+      font-size: 22px;
+      vertical-align: middle;
+    }
+  }
+
+  .use-icon {
+    span {
+      display: none;
+      vertical-align: middle;
+    }
+  }
+
+  // dropdown menu
+  .dropdown {
+    @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.2));
+    background: #FFF;
+    border-radius: 0 0 $global-radius $global-radius;
+    border: 1px solid $black-lighten-60;
+    border-top: 0;
+    font-size: font-scale(-2);
+    min-width: 12em;
+
+    li {
+      // divider between items on dropdown
+      border-bottom: 1px solid $black-lighten-60;
+      &:last-child {
+        border-bottom: 0;
+      }
+      &:not(.has-form):not(.active):hover > a:not(.button) {
+        background-color: $black-lighten-70;
+      }
+      a {
+        font-size: font-scale(-2);
+      }
+    }
+    .username div {
+      font-weight: bold;
+      padding: 1em;
+    }
+  }
+  @media #{$small-only} {
+    .dropdown {
+      @include box-shadow(none);
+      border: 0;
+    }
+  }
+
+  // notification on the header
+  #acl_global_notifications_label {
+    color: $yellow;
+    font-size: rem-calc(font-scale(-1));
+    line-height: 45px;
+    margin-left: 1em;
+  }
+
+  // responsive header
+  .toggle-topbar {
+    a { color: #FFF; }
+  }
+
+  &.expanded {
+    background: $purple;
+
+    .toggle-topbar {
+      a { color: $purple-lighten-30; }
+    }
+
+    .dropdown {
+      border-radius: 0;
+    }
+
+    .top-bar-section {
+      padding-right: 0;
+    }
+
+    .use-icon {
+      span {
+        display: inline-block;
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+// support IE8
+.no-rgba {
+  .top-bar-section .has-dropdown > a:after {
+    border-color: #FFF transparent transparent transparent;
+  }
+}
+
+
+// ------------------------------------------------------------
+// Footer
+// ------------------------------------------------------------
+#global_footer {
+  text-align: center;
+  color: $black-lighten-50;
+  font-size: rem-calc(font-scale(-2));
+
+  p {
+    font-size: inherit;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "purple": "#53529F",
+  "green":  "#42996D",
+  "black":  "#3F3D3C",
+  "orange": "#DE4D33",
+  "yellow": "#EABA51",
+  "blue":   "#2666AB",
+  "white":  "#FFFFFF",
+  "off-white":  "#F0F0F0",
+  "creme":  "#E6E3DF",
+
+  "chart": {
+    "color_0": "#EC4325",
+    "color_1": "#238D9D",
+    "color_2": "#F7802F",
+    "color_3": "#1866B8",
+    "color_4": "#F6BE45",
+    "color_5": "#4B48AC",
+    "color_6": "#A0C049",
+    "color_7": "#B13D5F",
+    "color_9": "#35A66D",
+    "color_9": "#D6CBBC"
+  }
+}

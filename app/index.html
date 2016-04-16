@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="composer">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../bower_components/ng-sortable/dist/ng-sortable.min.css">
+
+    <!-- OPTIONAL: default style -->
+    <link rel="stylesheet" type="text/css" href="../bower_components/ng-sortable/dist/ng-sortable.style.min.css">
+
+    <style>
+        #layout li {
+            list-style-type: none;
+        }
+    </style>
+
+</head>
+<body ng-controller="HomeController">
+
+
+    <div class="col-md-12">
+        <h1>ACL UI Component Composer</h1>
+<!--        <pre>{{selectedItem | json}}</pre>-->
+    </div>
+
+    <div class="col-md-12">
+
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Components</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li
+                            ng-drag-success="onDragComplete($data,$event)"
+                            ng-drag="true"
+                            ng-drag-data="item"
+                            ng-center-anchor="true"
+                            ng-repeat="item in list"
+                            class="list-group-item">
+                                {{item.type | uppercase}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="layout" class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <input type="text" class="form-control" ng-model="componentName" placeholder="Component name"/>
+                    </h3>
+                </div>
+                <div class="panel-body" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
+                    <ul class="list-group">
+                        <li
+                            ng-repeat="item in layout track by $index"
+                            ng-class="item.class"
+                            ng-click="selectItem(item)"
+                        >
+                            <span ng-if="item.template" compile-template ng-bind-html="trustedHtml(item)"></span>
+                            <span ng-if="!item.template">{{item.attr.text}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="small-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{componentName | spaceless}}</h3>
+                    </div>
+                    <div class="panel-body">
+                       <ul class="list-group" data-as-sortable="board.dragControlListeners" data-ng-model="layout">
+                           <li
+                               class="list-group-item"
+                               ng-repeat="item in layout track by $index"
+                               data-as-sortable-item
+                               ng-click="selectItem(item, $index)"
+                           >
+                               <div data-as-sortable-item-handle>{{item.type | uppercase}}</div>
+                           </li>
+                       </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="small-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Attributes</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr ng-repeat="(key, value) in selectedItem.attr">
+                                <td>{{key}}</td>
+                                <td>
+                                    <div ng-if="getAttributeType(value) === 'string'">
+                                        <input type="text" ng-model="selectedItem.attr.text"/>
+                                    </div>
+                                    <div ng-if="getAttributeType(value) === 'object'">
+                                        <select
+                                                ng-model="myOption"
+                                                ng-change="selectAction(key, myOption)"
+                                                ng-options="v as v.label for v in value">
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <button ng-show="selectedItem" ng-click="dropSelectedElemet()" class="btn btn-danger">Drop Element</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/ngDraggable/ngDraggable.js"></script>
+
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../bower_components/ng-sortable/dist/ng-sortable.min.js"></script>
+
+
+    <script src="assets/app.js"></script>
+
+</body>
+</html>

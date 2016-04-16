@@ -1,0 +1,48 @@
+// ------------------------------------------------------------
+// Extending the grid to use it with layout-friendly names:
+// full-width, one-half, one-third, two-thirds
+// one-quarter, three-quarters, one-sixth, five-sixths
+// ------------------------------------------------------------
+
+@mixin extend-grid($size) {
+	.#{$size}-one-half {
+		@include grid-column($columns:6,$collapse:null,$float:false);
+	}
+	.#{$size}-one-third {
+		@include grid-column($columns:4,$collapse:null,$float:false);
+	}
+	.#{$size}-two-thirds {
+		@include grid-column($columns:8,$collapse:null,$float:false);
+	}
+	.#{$size}-one-quarter {
+		@include grid-column($columns:3,$collapse:null,$float:false);
+	}
+	.#{$size}-three-quarters {
+		@include grid-column($columns:9,$collapse:null,$float:false);
+	}
+	.#{$size}-one-sixth {
+		@include grid-column($columns:2,$collapse:null,$float:false);
+	}
+	.#{$size}-five-sixths {
+		@include grid-column($columns:10,$collapse:null,$float:false);
+	}
+	.#{$size}-full-width {
+		@include grid-column($columns:12,$collapse:null,$float:false);
+	}
+}
+
+@include exports("extended-grid") {
+	@each $size in (small, medium, large) {
+		@include extend-grid($size)
+	}
+}
+
+.acl-row {
+	@include grid-row;
+
+	// make sure nested rows/columns are not extended beyond their wrapper.
+	& > & {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

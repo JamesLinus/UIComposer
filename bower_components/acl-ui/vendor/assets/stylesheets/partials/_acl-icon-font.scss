@@ -1,0 +1,105 @@
+//
+// define keyframe for spinning
+//
+@-moz-keyframes spin {
+  0% { -moz-transform: rotate(0deg); }
+  100% { -moz-transform: rotate(359deg); }
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+@-o-keyframes spin {
+  0% { -o-transform: rotate(0deg); }
+  100% { -o-transform: rotate(359deg); }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@function font-location($font-name, $font-path, $asset-pipeline: $asset-pipeline) {
+  @if $asset-pipeline == true {
+    @return  font-url("#{$font-name}");
+  }
+  @else {
+    @return url("#{$font-path}/#{$font-name}");
+  }
+}
+
+//
+// Icon Font: aclfont
+//
+// .eot for IE9 in compatibility mode
+// .eot?#iefix for IE8
+// .woff for IE9+ and others. It's inlined, so it doesn't raise any CORS errors
+// .svg only for webkit (due to the bug in Chrome Windows)
+
+
+@font-face {
+  font-family: 'acl-icon-font';
+  font-weight: normal;
+  font-style: normal;
+  src: font-location('acl-icon-font.eot', $font-path, $asset-pipeline);
+  src: font-location('acl-icon-font.eot#iefix', $font-path, $asset-pipeline) format('embedded-opentype'),
+       font-location('acl-icon-font.woff', $font-path, $asset-pipeline) format('woff');
+}
+
+@font-face {
+  font-family: 'acl-icon-font';
+  font-weight: normal;
+  font-style: normal;
+  src: inline('acl-icon-font.woff') format('woff');
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'acl-icon-font';
+    src: font-location('acl-icon-font.svg#acl-icon-font', $font-path, $asset-pipeline) format('svg');
+  }
+}
+
+[class^="acl-i-"], [class*=" acl-i-"] {
+  font-family: 'acl-icon-font';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+//
+// Spinning Icons
+//
+// Apply the following class to an icon to spin it.
+.acl-i-spin {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@import "../vendor/acl-icon-font";
+
+//
+// Support legacy icons.
+//
+// During transition process from iconmoon to acl-icon-font
+// Some icons were not included in acl-icon-font
+// but we still need to keep their class names
+// for backward compatibility.
+//
+.acl-i-sort-down { @extend .acl-i-caret-down; }
+.acl-i-sort-up { @extend .acl-i-caret-up; }
+.acl-i-unlock-alt { @extend .acl-i-unlock; }

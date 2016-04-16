@@ -1,0 +1,267 @@
+//
+// Date range picker
+//
+
+// Wrapper for date picker input and calendar icon
+// Required to position calendar icons
+.daterangepicker_container {
+  width: 225px;
+  position: relative;
+  // Daterange inputs
+  // Always visible to the user
+  input.daterangepicker_input {
+    padding-left: 30px;
+  }
+  // Calendar icons
+  .acl-i-calendar {
+    bottom: 10px;
+    cursor: pointer;
+    left: 10px;
+    position: absolute;
+  }
+}
+
+// Override MS behavior
+.daterangepicker_input::-ms-clear, [name='daterangepicker_start']::-ms-clear, [name='daterangepicker_end']::-ms-clear {
+  display: none;
+}
+
+// Date range picker
+.daterangepicker {
+  background-color: #FFF;
+  border: 1px solid $black-lighten-60;
+  border-radius: $global-radius;
+  box-shadow: 1px 1px 1px rgba($black, .2);
+  display: none;
+  max-width: none;
+  padding: 0;
+  z-index: 10;
+  // Backdrop for date picker --- jayde
+  input {
+    @include radius(2px);
+
+    box-shadow: none;
+    margin-bottom: 10px;
+    padding-left: 30px;
+  }
+  select {
+    background-position: 89% center;
+    border-radius: $global-radius;
+    padding: 8px 35px 10px 8px;
+    // Optional element month and year <select>
+    // appear above the date picker
+    &.monthselect, &.yearselect {
+      font-size: font-scale(-1);
+      padding: 8px 35px 10px 8px;
+      width: auto;
+    }
+    &.monthselect {
+      margin-right: 5px;
+    }
+  }
+  // Calendar table contains the dates
+  .calendar-table {
+    border-radius: $global-radius;
+    border-top: 1px solid rgba($black, .2);
+    padding: 0;
+  }
+  // override acl-ui default table styles
+  // and plugin's calendar styles
+  table {
+    border: none;
+  }
+  thead {
+    background-color: transparent;
+    tr:first-child {
+      background-color: rgba($black, .05);
+      th {
+        border-bottom: 1px solid rgba($black, .2);
+      }
+    }
+    // change cursor to pointer from hand for
+    // Su Mo Tu We Th Fr Sa and
+    // Month (Oct 2015 for example)
+    tr:not(:first-child) th, tr th.month {
+      cursor: default;
+    }
+  }
+  th {
+    background-color: transparent;
+    border-radius: 0;
+    line-height: 1;
+    padding: 10px 10px 8px;
+    vertical-align: middle;;
+    &:empty {
+      cursor: default;
+    }
+  }
+  tr:nth-of-type(even) {
+    background-color: transparent;
+  }
+  td {
+    line-height: 1;
+    padding: 8px;
+    &.in-range {
+      background-color: lighten($green, 50%);
+    }
+    &.off, &.off:hover, &.active.off, &.active.off:hover {
+      color: $black-lighten-50;
+    }
+    &.active.off:hover {
+      background-color: #EEE;
+    }
+    &.active:not(.off), &.active:not(.off):hover {
+      background-color: $green;
+    }
+  }
+  // Optional calendar time elements <select>
+  .calendar-time {
+    border-bottom: 1px solid rgba($black, .2);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    .hourselect, .minuteselect, .ampmselect {
+      display: inline-block;
+      padding-right: 15px;
+      width: auto;
+    }
+  }
+  // Override BS plugin's default icons
+  .fa.glyphicon {
+    font-family: 'acl-icon-font';
+    font-style: normal;
+    font-weight: normal;
+    &.glyphicon-chevron-left, &.glyphicon-chevron-right {
+      font-size: font-scale(-3);
+      top: auto;
+    }
+    &.glyphicon-chevron-left:before {
+      content: '\EA3D';
+    }
+    &.glyphicon-chevron-right:before {
+      content: '\EA3E';
+    }
+  }
+  // Customize calendar look and feel
+  // to match with acl styles
+  .calendar {
+    max-width: none;
+    th, td {
+      border: none;
+    }
+    .daterangepicker_input {
+      // calendar and optional clock icon
+      i {
+        top: 11px;
+      }
+    }
+    // Share styles between single and left calendar
+    &.left {
+      float: none !important;
+      margin: 0;
+      padding: 10px 0 10px 10px;
+      .calendar-table {
+        border-right: 1px solid rgba($black, .2);
+        padding-right: 0;
+      }
+      .daterangepicker_input {
+        padding-right: 0;
+        input {
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+    }
+    // Single calendar only
+    &.single {
+      margin: 0;
+      padding: 10px;
+      .calendar-table {
+        border: 1px solid rgba($black, .2);
+        border-radius: $global-radius;
+      }
+    }
+    // Right calendar
+    &.right {
+      float: none !important;
+      margin: 0;
+      padding: 10px 10px 10px 0;
+      .daterangepicker_input input {
+        border-bottom-left-radius: 0;
+        border-left: none;
+        border-top-left-radius: 0;
+      }
+    }
+  }
+  // Prevents full custom calendar plus predefined date ranges
+  // from wrapping on smaller screens
+  &.show-calendar {
+    display: table;
+    .left, .right, .ranges {
+      display: table-cell;
+      vertical-align: top;
+    }
+    .ranges {
+      ul {
+        min-width: 160px;
+      }
+    }
+  }
+  // Predefine range: Yesterday, Last 7 days, last month...
+  .ranges {
+    float: none !important;
+    margin: 0;
+    padding: 10px;
+    ul {
+      border-top: 1px solid rgba($black,.2);
+      margin: 0 0 9px;
+      min-width: 200px;
+      width: auto;
+    }
+    li {
+      background-color: #FFF;
+      border: none;
+      border-bottom: 1px solid rgba($black, .2);
+      border-radius: 0;
+      color: $black;
+      font-size: font-scale(-1);
+      line-height: 1;
+      margin-bottom: 0;
+      padding: 11px 15px 10px;
+      &.active, &:hover {
+        border: none;
+        border-bottom: 1px solid rgba($black, .2);
+        color: #FFF;
+      }
+      &:hover {
+        background-color: $green-darken-10;
+      }
+      &.active {
+        background-color: $green;
+      }
+    }
+  }
+  // Call to action
+  button {
+    // override button's default margin from acl-ui
+    margin-bottom: 0;
+    &.cancelBtn {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid transparent;
+      border-radius: 0;
+      box-shadow: none;
+      color: $blue;
+      font-size: font-scale(-1);
+      margin-left: 10px;
+      padding: 0 0 2px;
+      top: 1px;
+      &:hover {
+        border-bottom: 1px solid $blue;
+      }
+      &:active {
+        background-color: $blue;
+        color: #FFF;
+      }
+    }
+  }
+}

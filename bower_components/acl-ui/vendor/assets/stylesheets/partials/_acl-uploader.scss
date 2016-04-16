@@ -1,0 +1,347 @@
+.acl-uploader__container {
+  @include box-sizing(border-box);
+
+  margin-top: 20px;
+  div,
+  span {
+    @include box-sizing(border-box);
+  }
+}
+
+.acl-uploader__dnd {
+  background: $black-lighten-70;
+  border: 1px dashed $black-lighten-50;
+  border-radius: $global-radius;
+  font-size: font-scale(-2);
+  position: relative;
+  img {
+    margin-right: 5px;
+  }
+  &:before {
+    border-left: 1px solid $black-lighten-60;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+  }
+}
+
+.acl-uploader__dnd_expanded {
+  height: 200px;
+}
+
+.acl-uploader__dnd__wrap {
+  font-size: 0;
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.acl-uploader__dnd__container {
+  color: $black-lighten-10;
+  display: inline-block;
+  font-size: font-scale(4);
+  text-align: center;
+  width: 49%;
+}
+
+.acl-uploader__note {
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.25rem;
+  padding: 26px 15px 20px;
+  position: relative;
+  vertical-align: middle;
+  i {
+    color: $black-lighten-40;
+    font-size: font-scale(9);
+    position: relative;
+    top: -3px;
+    vertical-align: middle;
+  }
+}
+
+.acl-uploader__separator {
+  background-color: $black-lighten-70;
+  border: 1px solid $black-lighten-60;
+  border-radius: 50%;
+  color: $black-lighten-10;
+  display: inline-block;
+  font-size: font-scale(-4);
+  font-weight: bold;
+  left: 50%;
+  line-height: 24px;
+  margin-left: -12px;
+  min-height: 26px;
+  min-width: 26px;
+  padding: 0 5px;
+  position: absolute;
+  text-align: center;
+  top: 39%;
+  z-index: 2;
+}
+
+// move "or" slightly over to accommodate german and japanese
+// as they have 3 letters instead of 2 for "or"
+:lang(de),
+:lang(ja) {
+  .acl-uploader__separator {
+    margin-left: -19px;
+  }
+}
+
+.acl-uploader__form {
+  display: inline-block;
+  font-size: font-scale();
+  line-height: 1.25rem;
+  overflow: hidden;
+  padding: 0 0 0 35px;
+  position: relative;
+  text-align: center;
+  top: -5px;
+  vertical-align: middle;
+  width: 49%;
+  a {
+    cursor: pointer;
+    margin-right: 2px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: bottom;
+    &:visited {
+      color: $link-color;
+    }
+    input {
+      -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+      font-size: font-scale(9);
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: auto;
+    }
+  }
+  em {
+    color: $black-lighten-10;
+  }
+}
+
+$acl-uploader-icons-size: 16px;
+$acl-uploader-icons-padding: 10px;
+$acl-uploader-icons-top: 5px;
+
+%acl-uploader-info-icon {
+  left: $acl-uploader-icons-padding;
+  position: absolute;
+  top: $acl-uploader-icons-top;
+  z-index: 2;
+}
+
+.acl-uploader__progress {
+  background-color: $black-lighten-70;
+  border: 1px solid $black-lighten-50;
+  border-radius: $global-radius;
+  box-sizing: border-box;
+  height: 32px;
+  line-height: 20px;
+  margin-top: 5px;
+  position: relative;
+  .acl-i-check {
+    @extend %acl-uploader-info-icon;
+
+    color: $green-lighten-10;
+    display: none;
+    font-size: $acl-uploader-icons-size;
+  }
+  .acl-throbber {
+    @extend %acl-uploader-info-icon;
+
+    display: none;
+    height: $acl-uploader-icons-size;
+    width: $acl-uploader-icons-size;
+  }
+  .acl-i-exclamation-circle,
+  .acl-uploader__error-message {
+    display: none;
+  }
+}
+
+$acl-uploader-progress-result-height: 34px;
+$acl-uploader-progress-failed-padding: 10px;
+
+.acl-uploader__progress--uploaded {
+  border: 2px solid $green-lighten-10;
+  // as we added 1px to border-width
+  height: $acl-uploader-progress-result-height;
+  .acl-i-check {
+    display: inline-block;
+  }
+}
+
+.acl-uploader__progress--failed {
+  background-color: $white;
+  border: 2px solid $alert-color;
+  height: auto;
+  // as we added 1px to border-width
+  padding: $acl-uploader-progress-failed-padding 0;
+  .acl-uploader__filename,
+  .acl-uploader__error-message {
+    color: $alert-color;
+    display: inline-block;
+    font-weight: bold;
+  }
+  .acl-i-exclamation-circle {
+    @extend %acl-uploader-info-icon;
+
+    color: $alert-color;
+    display: inline-block;
+    font-size: $acl-uploader-icons-size;
+    top: $acl-uploader-icons-top + $acl-uploader-progress-failed-padding;
+  }
+  .acl-i-check,
+  .acl-throbber,
+  .acl-uploader__meta {
+    display: none;
+  }
+}
+
+.acl-uploader__fail {
+  @extend .acl-uploader__progress;
+  @extend .acl-uploader__progress--failed;
+  .acl-uploader__error-message {
+    margin: 4px 10px 0 36px;
+  }
+  a {
+    font-weight: bold;
+  }
+}
+
+.acl-uploader__filename {
+  color: $black-lighten-10;
+  display: inline-block;
+  font-size: font-scale();
+  font-weight: 700;
+  margin-left: 36px;
+  margin-top: 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.acl-uploader__meta {
+  color: $black-lighten-30;
+  float: right;
+  font-size: font-scale(-2);
+  margin-right: 10px;
+  margin-top: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.acl-uploader__processing {
+  display: none;
+}
+
+.acl-uploader__progress--sent {
+  .acl-throbber {
+    display: inline-block;
+  }
+  .acl-uploader__info {
+    display: none;
+  }
+  .acl-uploader__processing {
+    display: inline;
+  }
+}
+
+.acl-uploader__progress-bar {
+  background: $black-lighten-60;
+  height: 100%;
+  position: absolute;
+  width: 0;
+  z-index: 1;
+}
+
+.acl-uploader__overlay {
+  background-color: rgba(255,255,255,.7);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.acl-uploader__overlay-text {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    font-size: font-scale(12);
+    font-weight: bold;
+  }
+}
+
+// hide drag & drop for iPhone 6Plus landscape and below
+@media only screen and (max-width: 736px) {
+  .acl-uploader__dnd__container,
+  .acl-uploader__dnd:before,
+  .acl-uploader__separator {
+    display: none;
+  }
+  .acl-uploader__form {
+    display: block;
+    padding: 15px 20px;
+    top: auto;
+    width: auto;
+  }
+}
+
+// stack for larger than iPhone 6Plus landscape
+@media only screen and (min-width: 737px) and (max-width: 1024px) {
+  .acl-uploader__dnd__container,
+  .acl-uploader__form {
+    display: block;
+    width: auto;
+  }
+  .acl-uploader__container {
+    text-align: center;
+  }
+  .acl-uploader__dnd:before {
+    display: none;
+  }
+  .acl-uploader__dnd__container {
+    &:after {
+      border-bottom: 1px solid $black-lighten-60;
+      content: '';
+      display: block;
+      left: 0;
+      margin-top: 12px;
+      position: absolute;
+      right: 0;
+    }
+  }
+  .acl-uploader__note {
+    padding: 16px 20px 0 0;
+  }
+  .acl-uploader__separator {
+    left: auto;
+    margin-left: 0;
+    position: relative;
+  }
+  :lang(de),
+  :lang(ja) {
+    .acl-uploader__separator {
+      margin-left: 0;
+    }
+  }
+  .acl-uploader__form {
+    padding: 15px;
+  }
+}

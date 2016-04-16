@@ -1,0 +1,86 @@
+// We use this to remove underline hover effect for anchor when needed
+@mixin no-underline(){
+  &:hover {
+    border-bottom-color: transparent;
+    text-decoration: none;
+  }
+}
+
+@mixin box-shadow($options...) {
+  -webkit-box-shadow: $options;
+  -moz-box-shadow: $options;
+  box-shadow: $options;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+// Sets the specified background color and calculates a dark or light contrasted text color.
+// The arguments are passed through to the [contrast-color function](#function-contrast-color).
+@mixin contrasted(
+  $background-color,
+  $dark: $contrasted-dark-default,
+  $light: $contrasted-light-default,
+  $threshold: $contrasted-lightness-threshold
+) {
+  background-color: $background-color;
+  color: contrast-color($background-color, $dark, $light, $threshold);
+}
+
+@mixin linear-gradient($start-color, $stop-color) {
+  $bg-color: #FFF !default;
+
+  @if lightness($start-color) > lightness($stop-color) {
+    $bg-color: $stop-color;
+  }
+  @else {
+    $bg-color: $start-color;
+  }
+
+  background: $bg-color; // background color for older browsers
+  background: -moz-linear-gradient(top,  $start-color 0%, $stop-color 100%); // FF3.6+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start-color), color-stop(100%,$stop-color)); // Chrome,Safari4+
+  background: -webkit-linear-gradient(top,  $start-color 0%,$stop-color 100%); // Chrome10+,Safari5.1+
+  background: -o-linear-gradient(top,  $start-color 0%,$stop-color 100%); // Opera 11.10+
+  background: -ms-linear-gradient(top,  $start-color 0%,$stop-color 100%); // IE10+
+  background: linear-gradient(to bottom,  $start-color 0%,$stop-color 100%);
+  filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr= '#{$start-color}', endColorstr='#{$stop-color}', GradientType=0 )"; // IE6-9
+}
+
+// Rotate mixin using css transform with prefixes.
+@mixin rotate($deg) {
+  -webkit-transform: rotate($deg+deg);
+  -moz-transform: rotate($deg+deg);
+  -ms-transform: rotate($deg+deg);
+  -o-transform: rotate($deg+deg);
+  transform: rotate($deg+deg);
+}
+
+@mixin acl-card($color: $purple) {
+  border: 1px solid $black-lighten-60;
+  border-radius: $global-radius;
+  border-top: 4px solid $color;
+  color: $black;
+  &:hover {
+    border: 1px solid $black-lighten-50;
+    border-top: 4px solid $color;
+    box-shadow: 0 0 15px rgba($color, .25);
+  }
+  p {
+    font-size: font-scale(2);
+    font-weight: 200;
+    line-height: 1.625em;
+    padding: 1rem 1rem 0 1rem;
+  }
+}

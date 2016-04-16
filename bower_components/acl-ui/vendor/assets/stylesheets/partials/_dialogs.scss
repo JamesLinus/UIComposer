@@ -1,0 +1,279 @@
+//
+// variables
+//
+
+// Controlling default Joyride styles
+$joyride-tip-bg: #FFF;
+$joyride-tip-border: 1px solid $black-lighten-50;
+$joyride-tip-default-width: 300px !default;
+// This changes the nub size
+$joyride-tip-nub-size: 10px !default;
+
+// Mixin to add arrow positions to acl-popover
+@mixin add-arrow($position: top) {
+  $opposite: bottom !default;
+  $horizontal: left !default;
+
+  @if $position == bottom { $opposite: top; }
+  @if $position == left { $opposite: right; $horizontal: top; }
+  @if $position == right { $opposite: left; $horizontal: top; }
+
+  // Stroke
+  &:before {
+    #{$position}: -11px;
+    #{$horizontal}: 21px;
+    border-#{$opposite}-color: $black-lighten-30;
+    border-width: 11px;
+    border-#{$position}: 0;
+  }
+
+  // Fill
+  &:after {
+    #{$position}: -10px;
+    #{$horizontal}: 22px;
+    border-#{$opposite}-color: #FFF;
+    border-width: 10px;
+    border-#{$position}: 0;
+  }
+}
+
+@mixin custom-acl-popup-styles {
+	@include radius($global-radius);
+
+	border-color: lighten($black,5);
+	padding: 0;
+
+	.popup-heading {
+		background: $black;
+		color: #FFF;
+		padding: 1rem 1.75rem;
+	}
+
+	.popup-body {
+		padding: 1rem 1.75rem 0.5rem;
+
+		p:last-child {
+			margin-bottom: 0.5rem;
+		}
+	}
+
+	.popup-footer {
+		@include clearfix();
+
+		border-top: 1px solid $black-lighten-60;
+		padding: 0.5rem 1.75rem 0.75rem;
+	}
+
+	.popup-option {
+		float: left;
+		padding-top: 0.75rem;
+	}
+
+	.popup-cta {
+		float: right;
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+
+    a:visited {
+      color: $link-color;
+    }
+	}
+
+	.close-reveal-modal {
+		@include no-underline();
+
+		font-size: 1.5rem;
+		right: 1rem;
+	}
+
+	// override global button spacing
+	button, .acl-btn {
+		margin-bottom: 0;
+	}
+}
+
+//
+// Popup
+//
+.acl-popup, .reveal-modal {
+  .close-reveal-modal {
+    @include reveal-close;
+  }
+
+  @include reveal-modal-base;
+  @include reveal-modal-style(
+    $bg:#FFF,
+    $padding:rem-calc(20),
+    $border:true,
+    $box-shadow:true,
+    $radius:false,
+    $top-offset:rem-calc(100));
+  @include custom-acl-popup-styles;
+
+  @media #{$medium-up} {
+    &.tiny  { @include reveal-modal-base(false, 30%); }
+    &.small { @include reveal-modal-base(false, 40%); }
+    &.medium  { @include reveal-modal-base(false, 60%); }
+    &.large { @include reveal-modal-base(false, 70%); }
+    &.xlarge { @include reveal-modal-base(false, 95%); }
+  }
+}
+
+//
+// Tip
+//
+.acl-popover {
+  // class from Foundation
+  display: none;
+  position: absolute;
+  background: $joyride-tip-bg;
+  color: $joyride-tip-font-color;
+  z-index: 101;
+  top: 0;
+  #{$default-float}: 2.5%;
+  font-family: inherit;
+  font-weight: normal;
+  width: 95%;
+
+  .joyride-nub {
+    display: block;
+    position: absolute;
+    #{$default-float}: $joyride-tip-position-offset;
+    width: 0;
+    height: 0;
+    border: $joyride-tip-nub-size solid $joyride-tip-bg;
+
+    &.top {
+      border-top-style: solid;
+      border-color: $joyride-tip-bg;
+      border-top-color: transparent !important;
+      border-#{$default-float}-color: transparent !important;
+      border-#{$opposite-direction}-color: transparent !important;
+      top: -($joyride-tip-nub-size*2);
+    }
+    &.bottom {
+      border-bottom-style: solid;
+      border-color: $joyride-tip-bg !important;
+      border-bottom-color: transparent !important;
+      border-#{$default-float}-color: transparent !important;
+      border-#{$opposite-direction}-color: transparent !important;
+      bottom: -($joyride-tip-nub-size*2);
+    }
+
+    &.right { right: -($joyride-tip-nub-size*2); }
+    &.left { left: -($joyride-tip-nub-size*2); }
+  }
+
+  .acl-popover-wrapper {
+    @include clearfix();
+
+    width: 100%;
+    padding: $joyride-tip-padding;
+    padding-bottom: 1.25rem;
+
+    p { margin-bottom: 0; }
+    .button { margin-bottom: 0 !important; }
+  }
+
+  @include radius();
+  @include box-shadow(0 0 7px 0 rgba(0,0,0, 0.15));
+
+  color: $font-color;
+
+  // override and define styles for popover
+  .acl-popover-close {
+    @include no-underline();
+
+    position: absolute;
+    #{$opposite-direction}: 12px;
+    top: 10px;
+    color: $joyride-tip-close-color !important;
+    text-decoration: none;
+    font-size: $joyride-tip-close-size;
+    font-weight: $joyride-tip-close-weight;
+    line-height: .5 !important;
+
+    &:hover,
+    &:focus {
+      color: $black-lighten-40 !important;
+    }
+  }
+
+  .acl-popover-cta {
+    float: right;
+    margin-top: 1rem;
+  }
+
+  .heading {
+    color: $font-color;
+    margin-bottom: 0.5rem;
+  }
+
+  // Popover with arrow
+  &.wa {
+    // generic style for arrow
+    &:before, &:after {
+      border-style: solid;
+      border-color: transparent;
+      content: "";
+      height: 0;
+      position: absolute;
+      width: 0;
+    }
+
+    // arrow top
+    &.wa-top {
+      @include add-arrow(top)
+    }
+
+    // arrow bottom
+    &.wa-bottom {
+      @include add-arrow(bottom)
+    }
+
+    // arrow left
+    &.wa-left {
+      @include add-arrow(left)
+    }
+    // arrow right
+    &.wa-right {
+      @include add-arrow(right)
+    }
+  }
+
+  button, .acl-btn {
+    margin-bottom: 0;
+  }
+}
+
+// Styles for screens that are at least 768px;
+@media #{$small} {
+  .acl-popover { width: $joyride-tip-default-width; #{$default-float}: inherit;
+    .joyride-nub {
+      &.bottom {
+        border-color: $joyride-tip-bg !important;
+        border-bottom-color: transparent !important;
+        border-#{$default-float}-color: transparent !important;
+        border-#{$opposite-direction}-color: transparent !important;
+        bottom: -($joyride-tip-nub-size*2);
+      }
+      &.right {
+        border-color: $joyride-tip-bg !important;
+        border-top-color: transparent !important;
+        border-right-color: transparent !important; border-bottom-color: transparent !important;
+        top: $joyride-tip-position-offset;
+        left: auto;
+        right: -($joyride-tip-nub-size*2);
+      }
+      &.left {
+        border-color: $joyride-tip-bg !important;
+        border-top-color: transparent !important;
+        border-left-color: transparent !important;
+        border-bottom-color: transparent !important;
+        top: $joyride-tip-position-offset;
+        left: -($joyride-tip-nub-size*2);
+        right: auto;
+      }
+    }
+  }
+}

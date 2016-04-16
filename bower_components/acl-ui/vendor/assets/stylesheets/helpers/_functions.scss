@@ -1,0 +1,67 @@
+@function pow($Base, $Exponent) {
+
+  // Find and remove unit.
+  // Avoids messiness with unit calculations
+  $Unit: $Base * 0 + 1;
+  $Base: $Base/$Unit;
+
+  // This function doesnt support non-interger exponents.
+  // Warn the user about why this is breaking.
+  @if round($Exponent) != $Exponent {
+    @warn "Unfortunately, you can't use non-integer exponents.";
+  }
+
+  // Set up the loop, priming the return with the base.
+  $Return: $Base;
+
+  // If the number is positive, multiply it.
+  @if $Exponent > 0 {
+    // Basic feedback loop as exponents
+    // are recursively multiplied numbers.
+    @for $i from 1 to $Exponent {
+      $Return: $Return * $Base;
+    }
+  }
+
+  // If the number is 0 or negative
+  // divide instead of multiply.
+  @else {
+    // Libsass doesnt allow negative values in loops
+    @for $i from (-1 + 1) to (abs($Exponent) + 1) {
+      $Return: $Return / $Base;
+    }
+  }
+
+  // Return is now compounded ready to be returned.
+  // Add the unit back onto the number.
+  @return $Return * $Unit;
+}
+
+//  -------------------------------------------------
+// Font scale function to return a number
+// on a modular scale based on input
+//  -------------------------------------------------
+@function font-scale($scale: 0) {
+  @return round($rem-base * pow($font-scale-ratio, $scale));
+}
+
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+
+//  -------------------------------------------------
+// Returns the `$light` color when the `$color` is dark
+// and the `$dark` color when the `$color` is light.
+// The `$threshold` is a percent between `0%` and `100%` and it determines
+// when the lightness of `$color` changes from "dark" to "light".
+//  -------------------------------------------------
+@function contrast-color(
+  $color,
+  $dark: $contrasted-dark-default,
+  $light: $contrasted-light-default,
+  $threshold: $contrasted-lightness-threshold
+) {
+  @return if(lightness($color) < $threshold, $light, $dark)
+}

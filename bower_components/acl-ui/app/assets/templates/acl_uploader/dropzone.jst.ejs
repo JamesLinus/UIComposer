@@ -1,0 +1,30 @@
+<div class="acl-uploader__container">
+  <div class="acl-uploader__dnd">
+    <div class="acl-uploader__dnd__wrap">
+      <div class="acl-uploader__dnd__container">
+        <span class="acl-uploader__note">
+          <i class="acl-i-upload"></i>
+
+          <%= I18n.t('acl_uploader.drag_and_drop_note') %>
+        </span>
+      </div>
+
+      <span class="acl-uploader__separator">
+        <%= I18n.t('acl_uploader.or') %>
+      </span>
+
+      <div class="acl-uploader__form">
+        <form action=<%= url %>
+          enctype="multipart/form-data"
+          method="post"
+          accept-charset="UTF-8">
+          <a href="#">
+            <%= I18n.t('acl_uploader.choose_files') %>
+            <input name="Filedata" type="file" multiple="multiple" />
+          </a>
+          <em><%= I18n.t('acl_uploader.from_your_computer') %></em>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

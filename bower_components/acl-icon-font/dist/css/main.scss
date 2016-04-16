@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "acl-icon-font";
+  src: url('../fonts/acl-icon-font.eot');
+  src: url('../fonts/acl-icon-font.eot?#iefix') format('eot'),
+    url('../fonts/acl-icon-font.woff') format('woff'),
+    url('../fonts/acl-icon-font.ttf') format('truetype'),
+    url('../fonts/acl-icon-font.svg#acl-icon-font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+  Font family was moved from :before
+  watch out or side effect of this
+*/
+.acl-i{
+  font-family: "acl-icon-font";
+}
+
+.acl-i:before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-shadow: none;
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  white-space: normal;
+}
+
+@import "acl-icon-font";

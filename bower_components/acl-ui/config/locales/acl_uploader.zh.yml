@@ -1,0 +1,16 @@
+zh:
+  acl_uploader:
+    drag_and_drop_note: "拖放"
+    or: 或
+    choose_files: 选择文件
+    from_your_computer: 从您的电脑...
+    dropzone_overlay:
+      header: 马上完成！
+      text: 只需将文件放到页面上的任何地方。
+    processing: 正在处理...
+    fail_message_html: |
+      哎呀！出了些问题。请重试。如果问题仍然存在，请
+      <a href="%{support_url}" target="_blank">联系我们的支持团队</a>。
+    errors:
+      file_size_limit: 超出 1GB 限制
+      type_is_not_supported: 文件类型不受支持

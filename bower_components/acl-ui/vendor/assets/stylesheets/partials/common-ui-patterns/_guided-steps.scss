@@ -1,0 +1,102 @@
+// ------------------------------------------------------------
+// Guided Step-by-Step Walkthrough
+// Guides the user through complicated workflows
+// ------------------------------------------------------------
+//
+.acl-guided-steps {
+  border-collapse: collapse;
+  // Tells the browser to reset the number for every new list
+  counter-reset: counter;
+  display: table;
+  margin-left: 0;
+  table-layout: fixed;
+  width: 100%;
+  li {
+    // need to apply counter font styles to parent container
+    // to support IE11 and lower browsers on Win8, Win10 is okay
+    border-bottom: 1px solid $black-lighten-60;
+    clear: both;
+    color: $black-lighten-40;
+    display: table-row;
+    font-size: font-scale(10);
+    font-weight: 300;
+    list-style: none;
+    position: relative;
+    // Create our own custom numbers
+    &:before {
+      content: counter(counter);
+      counter-increment: counter;
+      display: table-cell;
+      line-height: 1;
+      padding: 20px 20px 20px 0;
+      position: relative;
+      text-align: right;
+      top: -2px;
+      width: 55px;
+    }
+    // A step has been disabled - in progress or just turned off
+    &.is-disabled {
+      opacity: .35;
+    }
+  }
+  // Main content for steps
+  .content {
+    color: $black;
+    display: table-cell;
+    font-size: font-scale(0);
+    font-weight: normal;
+    padding: 20px 0 20px;
+    vertical-align: top;
+    .content__header {
+      font-weight: bold;
+    }
+    .content__desc {
+      font-size: font-scale(-2);
+    }
+    // Call to action container, can have buttons, text, etc.
+    .content__cta {
+      padding-top: 15px;
+    }
+  }
+  // Message feedback such as failed or successful file attachment
+  .acl-notification {
+    font-size: font-scale(0);
+    margin: 10px 0 0;
+    padding: 10px 15px;
+    i {
+      margin-right: 2px;
+    }
+  }
+  // Uploader container
+  .uploader-wrapper {
+    margin-top: 15px;
+  }
+  // Container for feedback to the user as to the status - uploading,
+  // downloading, percentage, fail, success, etc.
+  .acl-progress {
+    margin-top: 10px;
+    // Progress Status
+    .acl-progress__status {
+      font-style: italic;
+      &.acl-progress__status--positive {
+        color: $green;
+      }
+      &.acl-progress__status--negative {
+        color: $orange;
+      }
+    }
+    .acl-progress__desc {
+      font-size: font-scale(-2);
+    }
+    .acl-throbber.tiny {
+      float: left;
+      margin: 0 7px 0 0;
+    }
+  }
+  .acl-btn {
+    margin-bottom: 5px;
+    i {
+      margin-right: 2px;
+    }
+  }
+}

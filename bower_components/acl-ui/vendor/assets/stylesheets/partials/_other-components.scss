@@ -1,0 +1,279 @@
+// TODO: Abstract the class,
+// turn it to a mixin with configurable parameters for:
+// Color and thickness
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+// base placeholder to generate filter and toggle
+// TODO: Add options for color.
+
+@mixin add-check-icon(){
+  &:before {
+    @include transition(all, 0.1s, linear);
+
+    content: "\EA04";
+    font-family: "acl-icon-font";
+    font-size: 12px;
+    position: absolute;
+    left: 9px;
+    top: 6px;
+  }
+}
+
+@mixin acl-pill() {
+  @include clearfix();
+
+  list-style-type: none;
+  margin-left: 0;
+
+  li {
+    @include transition(background, 0.2s, linear);
+
+    background: #FFF;
+    border: 1px solid $black-lighten-40;
+    border-right: 0;
+    cursor: pointer;
+    float: left;
+    font-size: rem-calc(font-scale(-1));
+    padding: 0.25rem 1.5rem;
+    position: relative;
+
+    &:active {
+      @include add-check-icon();
+    }
+
+    &:first-child {
+      @include side-radius(left);
+    }
+
+    &:last-child {
+      @include side-radius(right);
+
+      border-right: 1px solid $black-lighten-40;
+    }
+  }
+}
+
+//
+// Base mixin for acl-tag
+//
+@mixin acl-tag-base($background-color: $black-lighten-70, $text-color: $black-lighten-40) {
+  background: $background-color;
+  border-radius: .9rem;
+  color: $text-color;
+  font-size: rem-calc(font-scale(-2));
+  padding: .3rem .6rem;
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    background: $background-color;
+    content: "";
+    display: block;
+    height: 1.3rem;
+    position: absolute;
+    transform: scale(1, 1) rotate(45deg);
+    width: 1.3rem;
+    z-index: -1;
+  }
+}
+
+//
+// Placeholder for list item
+//
+%acl-list-item-base {
+  li {
+    padding: .5rem 0;
+  }
+}
+
+//
+// Throbber
+//
+.acl-throbber {
+  // default throbber size
+  -webkit-animation: spin 1.1s infinite linear;
+  animation: spin 1.1s infinite linear;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgba(128, 128, 128, 0.2);
+  border-left-color: $purple;
+  font-size: rem-calc(font-scale(-2));
+  height: 6em;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-indent: -9999em;
+  width: 6em;
+
+  &:after {
+    border-radius: 50%;
+    height: 6em;
+    width: 6em;
+  }
+
+  // Other throbber sizes
+  &.small {
+    height: 4em;
+    width: 4em;
+  }
+
+  &.tiny {
+    height: 2em;
+    width: 2em;
+  }
+}
+
+// Support legacy browsers
+.no-cssanimations {
+  .acl-throbber {
+    text-indent: 0;
+    border: 0;
+  }
+}
+
+
+// TODO:
+//  - Add styles for responsive
+//  - Support inline label (for instance: Chart Type: | Bar | Donut | Line |)
+//    for both Filter and Toggle
+
+//
+// Filter
+//
+.acl-filter {
+  @include acl-pill();
+
+  li {
+    &.active {
+      background: $green;
+      border-top-color: $green;
+      border-bottom-color: $green;
+      border-left-color: $green-lighten-20;
+      color: #FFF;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+//
+// Toggle
+//
+.acl-toggle {
+  @include acl-pill();
+
+  li {
+    &.active {
+      @include add-check-icon();
+
+      background: $green;
+      border-top-color: $green;
+      border-bottom-color: $green;
+      border-left-color: $green-lighten-20;
+      color: #FFF;
+
+      &:before {
+        color: #FFF;
+      }
+    }
+  }
+}
+
+//
+// Tag
+//
+.acl-tag {
+  @include acl-tag-base();
+}
+
+.acl-tag--point-left {
+  @include acl-tag-base();
+
+  &:before {
+    left: -.1rem;
+  }
+}
+
+.acl-tag--point-right {
+  @include acl-tag-base();
+
+  &:before {
+    right: -.1rem;
+  }
+}
+
+//
+// list-item
+//
+.acl-list-item {
+  @extend %acl-list-item-base;
+}
+
+.acl-list-item--line-separator {
+  @extend %acl-list-item-base;
+
+  > li {
+    border-bottom: 1px solid $black-lighten-70;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+//
+// Hyperlink with a spinner while content is being loaded.
+//
+a.has-pending-indicator {
+  i.acl-i-spin {
+    color: $black;
+    display: none;
+  }
+
+  &.is-pending {
+    i.acl-i-spin {
+      display: inline-block;
+    }
+  }
+}
+
+//
+// Heading with actions. Usually used in a
+// module that has preview and edit mode.
+// The action is often use to toggle from preview to edit mode
+//
+.heading_with_actions {
+  @include clearfix();
+}
+
+.heading_with_actions-heading {
+  float: left;
+  line-height: inherit; // override BS
+}
+
+.heading_with_actions-actions {
+  float: right;
+  line-height: 3rem;
+}

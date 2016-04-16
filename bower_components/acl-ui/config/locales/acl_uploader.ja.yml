@@ -1,0 +1,16 @@
+ja:
+  acl_uploader:
+    drag_and_drop_note: "ドラッグ アンド ドロップ"
+    or: または
+    choose_files: コンピューターからファイルを選択
+    from_your_computer: '...'
+    dropzone_overlay:
+      header: もう少しで完了です。
+      text: ページの任意の場所にファイルをドロップするだけです。
+    processing: 処理中...
+    fail_message_html: |
+      失敗しました。問題が発生しました。もう一度やり直してください。問題が解決しない場合は、
+      <a href="%{support_url}" target="_blank">サポート チームにお問い合わせ</a>ください。
+    errors:
+      file_size_limit: 1 GB の上限を超えています
+      type_is_not_supported: このファイルの種類はサポートされていません

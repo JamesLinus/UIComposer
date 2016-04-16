@@ -1,0 +1,130 @@
+// We use this to create 2 different styles for acl-notification
+@mixin notification-styles($color, $type) {
+  @if $type == "warning" {
+    &.#{$type} {
+      @include alert-style($color);
+      color: $font-color;
+
+      &.light {
+        background: $yellow-lighten-30;
+        border: 1px solid $color;
+      }
+    }
+  }
+  @else {
+    &.#{$type} {
+      @include alert-style($color);
+
+      &.light {
+        background: #FFF;
+        border: 1px solid $color;
+        color: $color;
+      }
+    }
+  }
+}
+
+.acl-notification {
+  @include radius($global-radius);
+  @include alert;
+
+  &.radius    { @include radius($alert-radius); }
+  &.round     { @include radius($global-rounded); }
+
+  &.success   { @include alert-style($success-color); }
+  &.alert     { @include alert-style($alert-color); }
+  &.secondary { @include alert-style($secondary-color); }
+  &.warning { @include alert-style($warning-color); }
+  &.info { @include alert-style($info-color); }
+  &.alert-close { opacity: 0}
+
+  .acl-notification-icon {
+    font-size: 19px;
+    margin-right: 0.1rem;
+    position: relative;
+    top: 2px;
+  }
+
+  .close {
+    @include alert-close;
+    @include no-underline();
+
+    visibility: hidden;
+    right: 0.5rem;
+  }
+
+  &.dismissible {
+    .close {
+      visibility: visible;
+    }
+  }
+
+  @include notification-styles($green, "success");
+  @include notification-styles($orange, "error");
+  @include notification-styles($yellow, "warning");
+
+  &.info {
+    @include alert-style($white);
+    border: 1px solid $purple;
+  }
+}
+
+// TODO: move .fos to form as where it seems to
+// belong to?
+//
+// !!! Need to resolve issue with cascading
+// because notification is loaded after form
+//
+// Feedback on save
+// These are inline feedback and fixed header feedback
+// the users get when they create/edit a form and save.
+.fos-inline {
+  @include transition(all, 0.2s, linear);
+
+  color: inherit;
+  position: absolute;
+  opacity: 0;
+  right: 1rem;
+  text-align: right;
+  top: 0;
+  width: 25%;
+}
+
+.save-success {
+  color: $green;
+
+  .fos-inline { opacity: 1; }
+}
+
+.fos-header {
+  @include transition(background-color, 0.5s, ease-in);
+  @include box-shadow(0 1px 1px 0 $black-lighten-60);
+
+  position: fixed;
+  top: -100%;
+  visibility: hidden;
+  z-index: 1;
+
+  &.is-visible {
+    background: #FFF;
+    top: 1rem;
+    visibility: visible;
+  }
+
+  &.success.is-visible {
+    border: 1px solid $green;
+    color: $green;
+  }
+
+  &.error.is-visible {
+    border: 1px solid $orange-darken-10;
+    color: $orange-darken-10;
+  }
+
+  &.error i {
+    font-size: 20px;
+    line-height: 0.5;
+    position: relative;
+    top: 3px;
+  }
+}

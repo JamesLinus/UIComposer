@@ -1,0 +1,156 @@
+.acl-panel-overlay {
+  background: rgba($creme-darken-30, .7);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 300ms ease;
+  visibility: hidden;
+  z-index: 99999;
+}
+
+.acl-panel {
+  background: white;
+  bottom: 0;
+  box-shadow: -1px -1px 2px rgba($black, .3);
+  box-sizing: border-box;
+  max-width: 620px;
+  position: fixed;
+  top: 0;
+  transition: transform 300ms ease;
+  width: 95%;
+  z-index: 100000;
+  &.is-open {
+    transform: translateX(0);
+    ~ .acl-panel-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .row {
+    padding: 0;
+    > .row {
+      padding: 0;
+    }
+  }
+}
+
+.acl-panel--slide-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.acl-panel--slide-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+@media #{$medium-up} {
+  .acl-panel--size-one-third {
+    max-width: none;
+    width: 30%;
+  }
+
+  .acl-panel--size-half {
+    max-width: none;
+    width: 50%;
+  }
+
+  .acl-panel--size-three-quarters {
+    max-width: none;
+    width: 75%;
+  }
+
+  .acl-panel--size-max {
+    max-width: none;
+  }
+}
+
+.panel__close {
+  background: none;
+  border: 1px solid rgba(white, .6);
+  border-radius: 50%;
+  box-shadow: none;
+  font-size: 12px;
+  padding: 4px 5px 3px 5px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.2rem;
+  transition: border 500ms ease;
+  @media #{$medium-up} {
+    top: 1.5rem;
+  }
+  .close__icon {
+    color: rgba(white, .5);
+    transition: color 300ms ease;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    background: none;
+    border-color: white;
+    box-shadow: none;
+    .close__icon {
+      color: white;
+    }
+  }
+  &:active {
+    top: 1.2rem;
+    @media #{$medium-up} {
+      top: 1.5rem;
+    }
+  }
+  &:focus {
+    outline: 1px dotted;
+  }
+  .acl-panel--secondary & {
+    border: 1px solid rgba($black, .6);
+    .close__icon {
+      color: rgba($black, .6);
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $black;
+      .close__icon {
+        color: $black;
+      }
+    }
+  }
+}
+
+.panel__body {
+  height: 100%;
+}
+
+.panel__header {
+  background-color: $purple;
+  color: white;
+  padding: 1rem 1.5rem;
+  .acl-panel--secondary & {
+    background-color: $creme;
+  }
+}
+
+.panel__title {
+  color: white;
+  font-weight: 300;
+  margin-bottom: 0;
+  .acl-panel--secondary & {
+    color: $black;
+  }
+}
+
+.panel-title__icon {
+  margin-right: rem-calc(10px);
+}
+
+.panel__content {
+  height: 88%;
+  overflow-y: auto;
+  padding: 1rem 1.5rem;
+}

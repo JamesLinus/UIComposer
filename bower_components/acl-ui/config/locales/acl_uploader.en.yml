@@ -1,0 +1,16 @@
+en:
+  acl_uploader:
+    drag_and_drop_note: "Drag & Drop"
+    or: OR
+    choose_files: Choose files
+    from_your_computer: from your computer...
+    dropzone_overlay:
+      header: Almost done!
+      text: Just drop the file anywhere on the page.
+    processing: Processing...
+    fail_message_html: |
+      Oops! Something went wrong. Please try again. If the problem persists, please
+      <a href="%{support_url}" target="_blank">contact our Support team</a>.
+    errors:
+      file_size_limit: exceeds the 1GB limit
+      type_is_not_supported: file type is not supported

@@ -1,0 +1,6 @@
+// Import base and add-on separately to make sure
+// other apps using this gem won't need to make change
+// if they are using everything from acl-ui gem.
+@import
+	"acl-ui-base.css.scss",
+	"acl-ui-add-ons.css.scss";

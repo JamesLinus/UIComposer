@@ -1,0 +1,161 @@
+.acl-breadcrumbs {
+  background: none;
+  margin-bottom: 0.8em;
+  margin-left: 0;
+  padding-left: 0;
+
+  li {
+    display: inline;
+    font-size: rem-calc(font-scale());
+    list-style-type: none;
+    line-height: 1.5;
+
+    &.current {
+      a {
+        @include no-underline();
+
+        color: $font-color;
+        cursor: default;
+        font-size: rem-calc(font-scale(2));
+        position: relative;
+      }
+    }
+
+    &:after {
+      @include rotate(20);
+
+      border-right: 1px solid $black-lighten-60;
+      content: "";
+      display: inline-block;
+      height: 26px;
+      margin-left: .7rem;
+      margin-right: .7rem;
+      position: relative;
+      top: 7px;
+    }
+
+    &:last-child:after { display: none; }
+  }
+
+  // Use this class when there is only one item in the breadcrumbs, it will give a back arrow.
+  &.single {
+    li:before {
+      content: "\EA3D";
+      font-family: "acl-icon-font";
+      font-size: rem-calc(font-scale(-3));
+      margin-right: 0.3rem;
+      top: -2px;
+    }
+  }
+}
+
+//
+// Pagination
+//
+
+// Foundation over qualifies selector with ul.
+// need to keep it
+ul.acl-pagination {
+  @include pagination;
+
+  display: inline-block;
+
+  li {
+    border-right: 1px solid $black-lighten-60;
+    margin-left: 0;
+    margin-right: 0.25rem;
+    padding-right: 0.25rem;
+
+    a {
+      @include no-underline();
+      @include radius(2px);
+    }
+
+    &:last-child { border-right: 0; }
+  }
+
+  .arrow {
+    font-family: "acl-icon-font";
+    a { color: $font-color; }
+  }
+}
+
+//
+// Side Navigation
+//
+.acl-side-nav {
+  @include radius($global-radius);
+  @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.07));
+
+  border: 1px solid $black-lighten-60;
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    margin-left: 0;
+
+    a {
+      @include no-underline();
+
+      background: #FFF;
+      display: inline-block;
+      height: 102%;
+      padding: 1rem 1rem 1rem 1.8rem;
+      vertical-align: middle;
+      width: 100%;
+      position: relative;
+
+      &:hover {
+        @include transition(background, 0.5s, linear);
+        background: lighten($black-lighten-70, 2);
+
+        &:before {
+          content: "";
+          width: 6px;
+          height: 102%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: $black-lighten-20;
+        }
+      }
+    }
+
+    // By default active indicator
+    // sits on the left edge
+    &.active a:before {
+      content: "";
+      width: 6px;
+      height: 102%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: $green;
+    }
+  }
+
+  // For side nav with active
+  // indicator sits on the right edge
+  &.flipped {
+    li.active a:before {
+      right: 0;
+      left: auto;
+    }
+
+    // make sure hover indicator is shown on the right
+    li a:hover:before {
+      right: 0;
+      left: auto;
+    }
+  }
+
+  // For icons in side nav
+  i {
+    color: $black-lighten-20;
+    font-size: 24px;
+    margin-right: .25rem;
+    position: relative;
+    top: 3px;
+  }
+}

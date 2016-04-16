@@ -1,0 +1,75 @@
+// --------------------------------------------
+// Nested checkboxes
+// --------------------------------------------
+//
+.nested_checkboxes {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  input[type="checkbox"] {
+    margin: -4px 2px 0 0;
+  }
+
+  label, .faux_label {
+    font-weight: normal;
+
+    &.is-selected {
+      font-weight: bold;
+    }
+  }
+
+  ul:first-child {
+    padding-left: 0;
+  }
+
+  .has-children {
+    // Only expand the first level
+    > span {
+      cursor: pointer;
+      margin: 0;
+
+      &:before {
+        content: '\EA42';
+        color: $black-lighten-20;
+        display: inline-block;
+        font-family: "acl-icon-font";
+        font-size: 1.1rem;
+        position: relative;
+        text-align: center;
+        top: 2px;
+        width: 1rem;
+      }
+    }
+
+    // Toggle caret direction
+    &.is-expanded > span:before {
+      content: '\EA3F';
+      text-align: left;
+    }
+
+    // Show the first level of child items
+    &.is-expanded > .child-items {
+      display: block;
+    }
+
+    // Show the first level of child items
+    &.is-expanded {
+      padding-bottom: 0.25rem;
+    }
+
+    &.is-expanded .item-label {
+      display: inline-block;
+    }
+  }
+
+  // All children are hidden by default.
+  .child-items {
+    display: none;
+    margin-top: .4rem;
+  }
+
+  .item-label {
+    display: none;
+    float: right;
+  }
+}

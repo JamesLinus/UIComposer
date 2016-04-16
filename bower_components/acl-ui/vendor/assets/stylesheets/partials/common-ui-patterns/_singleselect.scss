@@ -1,0 +1,41 @@
+.singleselect-item {
+  &.is-selected {
+    display: none !important;
+  }
+
+  &.is-filtered-out {
+    display: none !important;
+  }
+}
+
+.singleselect-toggle {
+  &, &:focus {
+    outline: none;
+  }
+}
+
+.singleselect-new {
+  padding: 5px 10px;
+  line-height: 15px;
+
+  a {
+    display: block;
+  }
+}
+
+.singleselect-blank_state {
+  display: none;
+
+  padding: 5px 10px;
+  color: $black-lighten-30;
+}
+
+.singleselect-container.is-blank {
+  .singleselect-blank_state {
+    display: block;
+  }
+
+  .singleselect-search, .singlesearch-list {
+    display: none;
+  }
+}

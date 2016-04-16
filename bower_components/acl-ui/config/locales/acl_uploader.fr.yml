@@ -1,0 +1,16 @@
+fr:
+  acl_uploader:
+    drag_and_drop_note: "Glisser-déposer"
+    or: OU
+    choose_files: Sélectionner des fichier
+    from_your_computer: depuis votre ordinateur...
+    dropzone_overlay:
+      header: Vous avez presque terminé !
+      text: Il vous suffit de déposer le fichier n'importe où sur la page.
+    processing: Traitement en cours...
+    fail_message_html: |
+      Oups ! Un incident est survenu. Veuillez essayer à nouveau. Si le problème persiste, veuillez
+      <a href="%{support_url}" target="_blank">contacter notre équipe d'assistance</a>.
+    errors:
+      file_size_limit: dépasse la limite d'1 Go
+      type_is_not_supported: le type de fichier n'est pris en charge

@@ -1,0 +1,28 @@
+{
+  "name": "acl-ui",
+  "version": "<%= version %>",
+  "homepage": "https://github.com/acl-services/acl-ui",
+  "authors": [
+    "ACL Services"
+  ],
+  "dependencies": {
+    "bower-foundation": "https://github.com/zurb/bower-foundation.git#5.5.0",
+    "acl-icon-font": "git@github.com:acl-services/acl-icon-font.git"
+  },
+  "main": [
+    "app",
+    "vendor"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "Gemfile*",
+    "Rakefile",
+    "*.gemspec",
+    "test",
+    "tests"
+  ],
+  "private": true
+}

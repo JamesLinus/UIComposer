@@ -1,0 +1,16 @@
+es:
+  acl_uploader:
+    drag_and_drop_note: "Arrastrar y soltar"
+    or: O
+    choose_files: Elija los archivos
+    from_your_computer: de su computadora ...
+    dropzone_overlay:
+      header: Falta muy poco.
+      text: Simplemente ubique el archivo en cualquier lugar de la página.
+    processing: En proceso...
+    fail_message_html: |
+      ¡Huy! Algo salió mal. Por favor, inténtelo de nuevo. Si el problema persiste,
+      <a href="%{support_url}" target="_blank">comuníquese con nuestro equipo de soporte</a>.
+    errors:
+      file_size_limit: supera el límite de 1 GB
+      type_is_not_supported: tipo de archivo no compatible

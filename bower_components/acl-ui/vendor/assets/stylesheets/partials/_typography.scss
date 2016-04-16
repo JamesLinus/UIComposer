@@ -1,0 +1,82 @@
+// ---------------------------------------------
+// TYPOGRAPHY
+// ---------------------------------------------
+
+@mixin kern($size) {
+  @if $size == loose { letter-spacing: 0.01em; }
+  @if $size == medium { letter-spacing: -0.02em; }
+  @if $size == tight { letter-spacing: -0.04em; }
+  @if $size == xtight { letter-spacing: -0.15em; }
+}
+
+body {
+  color: $black;
+}
+
+h1 {
+  @include kern(loose);
+
+  font-weight: 300;
+}
+h4, h5, h6 { font-weight: 700; }
+p {
+  @include kern(loose);
+
+  font-weight: 400;
+}
+
+blockquote, .acl-blockquote {
+  background: lighten($creme, 5);
+  color: $black;
+  padding: rem-calc(15px) rem-calc(20px);
+  border-left: 5px solid $creme-darken-20;
+  font-size: rem-calc(font-scale(2));
+  p {
+    color: inherit;
+    font-style: italic;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  cite {
+    color: inherit;
+    font-style: italic;
+    font-weight: 700;
+  }
+  em {
+    font-style: normal;
+  }
+}
+
+a {
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    // Need to use border-bottom, instead of
+    // border-bottom-color, which won't work.
+    border-bottom: 1px solid $link-color;
+  }
+
+  &:visited {
+    color: adjust-hue($link-color, 68);
+  }
+
+  // For accessibility
+  &:focus {
+    outline: 1px dotted;
+  }
+
+  // Don't need this for users using mouse.
+  &:active {
+    outline: none;
+  }
+
+  &.link-secondary {
+    border-bottom: 1px solid $link-color;
+
+    &:hover {
+      border-bottom: 1px solid transparent;
+    }
+  }
+}

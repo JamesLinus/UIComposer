@@ -1,0 +1,222 @@
+// --------------------------------------------
+// Multi-select
+// --------------------------------------------
+//
+// TO-DO: reorganize this partial
+
+%multiselect-item-block {
+  cursor: pointer;
+  display: inline-block;
+  font-size: font-scale(-1);
+  margin: 3px;
+  padding: 3px 10px 4px;
+}
+
+%detailed-list-item {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+%multiselect-sub-heading {
+  font-size: font-scale(0);
+  font-weight: bold;
+  margin-bottom: .2rem;
+}
+
+.multiselect-container {
+  border: 1px solid $black-lighten-70;
+  border-radius: $global-radius;
+}
+
+// Simple(default) selectable list items
+.multiselect-list {
+  list-style: none outside;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  &.is-read-only .multiselect-item {
+    cursor: default;
+  }
+  .multiselect-item {
+    @extend %multiselect-item-block;
+
+    border: 2px solid $black-lighten-70;
+    border-radius: $global-radius;
+    // For default look: keep this fast for responsive feeling, when an item is toggled
+    transition: opacity .2s ease-in;
+    &.is-selected {
+      background: $green;
+      border-color: $green;
+      color: #fff;
+    }
+    &.is-selected a {
+      color: #fff;
+    }
+    &.is-disabled {
+      background: lighten($black-lighten-70, 10);
+      color: lighten($black, 40);
+      cursor: not-allowed;
+    }
+    &.is-filtered-out {
+      opacity: 0;
+      position: absolute;
+      top: -10000px;
+    }
+  }
+}
+
+// Detailed selectable list items
+.detailed-multiselect-list {
+  padding-left: 0;
+  .multiselect-item {
+    @extend %detailed-list-item;
+
+    border-left: 5px solid transparent;
+    // for detailed look: keep this for transition to .is-filtered-out state
+    transition: opacity .3s ease-in;
+    .multiselect-item-label {
+      font-weight: bold;
+      input {
+        float: left;
+        margin-right: .5rem;
+      }
+    }
+    .multiselect-item-content {
+      padding-left: 1.2rem;
+    }
+    &.is-selected {
+      border-left-color: $green;
+    }
+    &.is-filtered-out {
+      height: 0;
+      opacity: 0;
+      position: absolute;
+      top: -10000px;
+    }
+  }
+}
+
+.multiselect-new {
+  @extend %multiselect-item-block;
+  // TODO: switch to acl-ui icon font and use it for 'plus' sign
+  &:before {
+    color: $black-lighten-50;
+    content: '+';
+    font-size: 1.5em;
+    line-height: 1;
+  }
+}
+
+.multiselect-container {
+  border: 1px solid $black-lighten-70;
+  border-radius: $global-radius;
+  position: relative;
+  .controls & {
+    margin-bottom: 1.5rem;
+  }
+  .multiselect-sub-heading {
+    @extend %multiselect-sub-heading;
+  }
+}
+
+.multiselect-header {
+  background: lighten($black-lighten-70, 12);
+  border-bottom: 1px solid $black-lighten-70;
+  border-radius: $global-radius $global-radius 0 0;
+  box-sizing: border-box;
+  display: table;
+  margin: 0;
+  padding: 1rem 2rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.multiselect-title {
+  display: table-cell;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.multiselect-filters {
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+  width: 50%;
+  input {
+    margin: 0 0 0 1rem;
+    // Temporarily disable (x) icon for IE10+ until we implement
+    // one that works across browsers
+    &::-ms-clear {
+      display: none;
+    }
+  }
+}
+
+.multiselect-filter-result {
+  padding-left: 1.5rem;
+  &.is-empty {
+    display: none;
+  }
+}
+
+// Use this class when Filter(search box) is not needed.
+.multiselect-header--minimal {
+  .multiselect-filters {
+    width: 35%;
+  }
+  input {
+    display: none;
+  }
+}
+
+.multiselect-clear {
+  bottom: -2px;
+  position: relative;
+}
+
+.multiselect-view {
+  padding: 1rem 1.5rem;
+}
+
+.detailed-multiselect-view {
+  padding-top: 1.5rem;
+}
+
+.multiselect-footer {
+  border-top: 1px solid $black-lighten-70;
+  padding: 1rem 1.7rem 1.1rem
+}
+
+.multiselect-preview {
+  .multiselect-mode-switch {
+    float: right;
+    margin-left: 1rem;
+    // pull this mode switch out, above the view area,
+    // because of usage of data-tab from BS
+    margin-top: -2.5rem;
+  }
+  .multiselect-sub-heading {
+    @extend %multiselect-sub-heading;
+  }
+  // Simple(default) list item with pill-like design
+  .list-items {
+    padding-left: 0;
+    .item {
+      background: $green;
+      border-radius: $global-radius;
+      color: #fff;
+      display: inline-block;
+      margin: 3px;
+      padding: 3px 10px 4px;
+    }
+  }
+  // Detailed list item with preview text for description
+  .detailed-list-items {
+    padding-left: 0;
+    .item {
+      @extend %detailed-list-item;
+
+      border-left: 5px solid $green;
+    }
+  }
+}

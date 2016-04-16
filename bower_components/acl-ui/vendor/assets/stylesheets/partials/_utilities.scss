@@ -1,0 +1,48 @@
+//  -------------------------------------------------
+//  Debugging classes
+//  -------------------------------------------------
+@mixin debugger-generator($color) {
+  .dbg-bdr-#{$color} {
+    border: 1px solid $color !important;
+  }
+  .dbg-bg-#{$color} {
+    background: $color !important;
+  }
+}
+
+@include exports("debug") {
+  @each $color in (red, green, orange, grey) {
+    @include debugger-generator($color)
+  }
+}
+
+//  -------------------------------------------------
+//  Grid manipulation classes
+//  -------------------------------------------------
+.pull-right {
+  float: right;
+}
+
+hr{
+  &.divider {
+    max-width: 25%;
+    margin: 2em auto;
+  }
+  &.space {
+    border: 1px solid transparent;
+  }
+}
+
+//  -------------------------------------------------
+//  visibility classes
+//  -------------------------------------------------
+.hide {
+  display: none !important;
+}
+
+//  -------------------------------------------------
+//  text color classes
+//  -------------------------------------------------
+.text--light {
+  color: $black-lighten-30;
+}

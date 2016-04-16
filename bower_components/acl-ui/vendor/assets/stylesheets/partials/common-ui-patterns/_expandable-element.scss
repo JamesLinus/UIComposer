@@ -1,0 +1,44 @@
+// --------------------------------------------
+// Expandable content.
+// global class for expandable content
+// --------------------------------------------
+//
+
+$caret-width: 1rem;
+
+.expandable {
+  .expandable-trigger {
+    cursor: pointer;
+    margin: 0;
+
+    &:before {
+      content: '\EA42';
+      color: $black-lighten-20;
+      display: inline-block;
+      font-family: "acl-icon-font";
+      font-size: 1.1rem;
+      position: relative;
+      text-align: center;
+      top: 2px;
+      width: $caret-width;
+    }
+  }
+
+  .expandable-content {
+    display: none;
+    margin-left: $caret-width;
+  }
+
+  &.is-expanded {
+    .expandable-content {
+      display: block;
+    }
+
+    // Toggle caret direction
+    .expandable-trigger:before {
+      content: '\EA3F';
+      text-align: left;
+    }
+  }
+}
+

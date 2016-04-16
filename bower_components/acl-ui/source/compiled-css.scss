@@ -1,0 +1,13 @@
+//
+// Override the following variables from acl-ui
+//
+// Set $asset-pipeline to false for non-rails apps
+$asset-pipeline: false;
+
+// If the above is false then $font-path can also be customizable
+$font-path: '../fonts';
+
+// Option to load Lato from Google CDN
+$load-custom-font: true;
+
+@import "vendor/assets/stylesheets/acl-ui.css.scss";

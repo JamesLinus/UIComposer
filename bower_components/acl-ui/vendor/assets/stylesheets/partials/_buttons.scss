@@ -1,0 +1,285 @@
+//
+// Todo:
+// 3. Add button with icon
+//
+
+$disabled-button-label-color: $black-lighten-70;
+
+// Modify Foundation mixin for better control of spacing
+
+// @MIXIN
+//
+// We use this mixin to add button size styles
+//
+// $padding - Used to build padding for buttons Default: $button-med ||= rem-calc(12)
+// $full-width - We can set $full-width:true to remove side padding extend width - Default: false
+
+@mixin button-size($padding:$button-med, $full-width:false) {
+
+  // We control which padding styles come through,
+  // these can be turned off by setting $padding:false
+  @if $padding {
+    padding-top: $padding + rem-calc(1);
+    padding-#{$opposite-direction}: $padding * 2;
+    padding-bottom: $padding;
+    padding-#{$default-float}: $padding * 2;
+
+    // We control the font-size based on mixin input.
+    @if      $padding == $button-med { font-size: $button-font-med; }
+    @else if $padding == $button-tny { font-size: $button-font-tny; }
+    @else if $padding == $button-sml { font-size: $button-font-sml; }
+    @else if $padding == $button-lrg { font-size: $button-font-lrg; }
+  }
+
+  // We can set $full-width: true to remove side padding extend width.
+  @if $full-width {
+    // We still need to check if $padding is set.
+    @if $padding {
+    padding-top: $padding;
+    padding-bottom: $padding + rem-calc(1);
+    } @else if $padding == false {
+      padding-top:0;
+      padding-bottom:0;
+    }
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+}
+
+// Generate button styles using Foundation mixins
+button, .acl-btn {
+  @include single-transition(background-color);
+
+  // Default button with small padding
+  @include button($padding:0.5rem);
+
+  // Rounded corner comes from $global-radius
+  @include button-style($bg:$black-lighten-70, $radius:true);
+  @include box-shadow(0 3px 0 0 $black-lighten-60);
+
+  // 3D pushing style
+  &:active {
+    @include box-shadow(0 1px 0 0 $black-lighten-60);
+
+    top: 2px;
+  }
+
+  &:focus {
+    border: 1px dotted;
+  }
+
+  // hide spinning icon
+  i.acl-i-spin {
+    display: none;
+  }
+
+  // Button sizes
+  &.large  {
+    @include button-size($padding:1rem);
+
+    &:active {
+      @include box-shadow(0 1px 0 0 $purple);
+    }
+  }
+
+  &.small {
+    @include button-size($padding:0.3rem);
+    font-size: rem-calc(font-scale(-1));
+  }
+  &.tiny {
+    @include button-size($padding:0.2rem);
+    font-size: rem-calc(font-scale(-2));
+  }
+  &.expand {
+    @include button-size($padding:null,$full-width:true);
+    display: inherit;
+  }
+
+  // Button types
+  &.primary {
+    @include button-style($bg:$secondary-color, $radius:true);
+    @include box-shadow(0 3px 0 0 $green-darken-10);
+
+    &:active { @include box-shadow(0 1px 0 0 $green-lighten-10); }
+  }
+
+  &.secondary {
+    @include button-style($bg:$primary-color, $radius:true);
+    @include box-shadow(0 3px 0 0 $purple-darken-10);
+
+    &:active { @include box-shadow(0 1px 0 0 $purple-darken-10); }
+  }
+
+  &.warning {
+    @include button-style($bg:$warning-color, $radius:true);
+    @include box-shadow(0 3px 0 0 $orange-darken-10);
+
+    // Make default warning button less reddish.
+    background: #FFF;
+    color: $warning-color;
+
+    &:active { @include box-shadow(0 1px 0 0 $orange-darken-10); }
+  }
+
+    &.warning-solid {
+    @include button-style($bg:$warning-color, $radius:true);
+    @include box-shadow(0 3px 0 0 $orange-darken-10);
+
+    &:active { @include box-shadow(0 1px 0 0 $orange-darken-10); }
+  }
+
+  &.wi {
+    //add icon here
+  }
+
+  // allow button to expand entire row.
+  &.expand {
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  // Extra spacing between button & button, button and <a>
+  & + &, & + a { margin-left: 0.5em; }
+
+  // Disabled button
+  &.disabled, &.disable, &[disabled] {
+    background-color: $black-lighten-60;
+    border: 1px solid $black-lighten-50 !important;
+    box-shadow: none;
+    color: $disabled-button-label-color !important;
+    cursor: $cursor-default-value;
+    outline : none;
+
+    &:hover, &:focus {
+      background-color: $black-lighten-60;
+    }
+
+    &:active {
+      box-shadow: none;
+      top: 0;
+    }
+  }
+
+  // Dropdown Button
+  &.dropdown {
+    @include dropdown-button($pip-color: $black);
+
+    &.primary, &.secondary, &.warning-solid {
+      @include dropdown-button($pip-color: #fff);
+    }
+
+    &.warning {
+      @include dropdown-button($pip-color: $orange);
+      &:hover, &:focus {
+        @include dropdown-button ($pip-color: #fff);
+      }
+    }
+  }
+
+  // More Dropdown Button
+  &.more-dropdown {
+    padding-bottom: 3px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    &:after {
+      border: 0;
+      content: "…";
+      font-size: font-scale(7);
+      height: auto;
+      line-height: 0;
+      position: static;
+      vertical-align: super;
+      width: auto;
+    }
+  }
+
+  // Busy button
+  &.pending, &.is-pending {
+    background-color: $black-lighten-30;
+    border: 1px solid $black-lighten-20 !important;
+    box-shadow: none;
+    color: #FFF;
+
+    i.acl-i-spin {
+      display: inline-block;
+    }
+
+    &:hover, &:focus {
+      background-color: $black-lighten-30;
+    }
+
+    &:active {
+      top: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+// Dropdown Menu
+.f-dropdown {
+  border-radius: $global-radius;
+  border: 1px solid rgba(black, .15);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  max-width: none;
+  padding: rem-calc(10px);
+  width: auto;
+  &:before {
+    border: 0;
+  }
+  &:after {
+    border: 0;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    li {
+      border-radius: $global-radius;
+      font-size: font-scale(0);
+      transition: background .2s ease-out;
+      &:hover, &:focus {
+        background: lighten($creme, 5%);
+      }
+      a {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+//  for button class that is applied on <a>
+a.acl-btn {
+  &:hover {
+    border-bottom-color: transparent;
+  }
+
+  // target default button w/o adding a class to markup
+  &:not(.primary):not(.secondary):not(.warning):not(.warning-solid) {
+    &:visited { color: $font-color; }
+  }
+}
+
+//  for button class that is applied on <input type='button'>
+input[type='button'], input[type='submit'] {
+  font-size: rem-calc(font-scale());
+
+  &.small {
+    font-size: $button-font-sml;
+  }
+  &.tiny {
+    font-size: $button-font-tny;
+  }
+}
+
+// ------------------------------------------
+//  Inbox
+// ------------------------------------------
+//
+// override F's button spacing used in a table
+table {
+  button, .button, .acl-btn {
+    margin-bottom: 0;
+  }
+}
